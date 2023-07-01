@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { ContactItem, ContactName } from './Contact.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
 import { selectIsLoadingContacts } from 'redux/contacts/selectors';
 import { IconButton } from '@mui/material';
 
-export const Contact = ({ name, number, id }) => {
+export const Contact = ({ name, number, id, setIdEdit }) => {
   // const [idOfDeletingContact, setIdOfDeletingContact] = useState(null);
   const dispatch = useDispatch();
   const isLoadingContacts = useSelector(selectIsLoadingContacts);
@@ -26,10 +27,22 @@ export const Contact = ({ name, number, id }) => {
         <ContactName>{name}:</ContactName>
         <p>{number}</p>
       </div>
-
-      <IconButton aria-label="delete" onClick={handleDeleteContact} sx={{border: "2px solid transparent",}}>
-        <DeleteIcon />
-      </IconButton>
+      <div>
+        <IconButton
+          aria-label="edit"
+          onClick={() => setIdEdit(id)}
+          sx={{ border: '2px solid transparent' }}
+        >
+          <EditIcon />
+        </IconButton>
+        <IconButton
+          aria-label="delete"
+          onClick={handleDeleteContact}
+          sx={{ border: '2px solid transparent' }}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </div>
     </ContactItem>
   );
 };

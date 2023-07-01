@@ -1,21 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import shortid from 'shortid';
 import Notiflix from 'notiflix';
 
-import { Form } from './ContactForm.styled';
+import { ButtonContainer, Form } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
+import { addContact, updateContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 
 const nameId = shortid.generate();
 const numberId = shortid.generate();
 
-export const ContactForm = () => {
+export const ContactForm = ({ idEdit, setIdEdit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (idEdit) {
+      const indexOfCurrentId = contacts.findIndex(
+        contact => contact.id === idEdit
+      );
+      setName(contacts[indexOfCurrentId].name);
+      setNumber(contacts[indexOfCurrentId].number);
+    }
+  }, [idEdit, contacts]);
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -33,30 +43,33 @@ export const ContactForm = () => {
     }
   };
 
+  const handleClick = () => {
+    setIdEdit(null);
+    formReset();
+  };
+
   const equalContacts = () => {
     return contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   };
 
-  const addNewContact = (name, number) => {
-    const newContact = {
-      name,
-      number,
-    };
-
-    dispatch(addContact(newContact));
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (equalContacts()) {
-      Notiflix.Notify.failure(`${name} already in contacts`);
-      return;
-    }
+    const buttonName = e.currentTarget.elements.button.textContent;
 
-    addNewContact(name, number);
+    if (buttonName === 'Edit contact') {
+      dispatch(updateContact({ id: idEdit, name, number }));
+      setIdEdit(null);
+    } else {
+      if (equalContacts()) {
+        Notiflix.Notify.failure(`${name} already in contacts`);
+        return;
+      }
+
+      dispatch(addContact({ name, number }));
+    }
 
     formReset();
   };
@@ -94,8 +107,16 @@ export const ContactForm = () => {
           required
         />
       </label>
-
-      <button type="submit">Add contact</button>
+      <ButtonContainer>
+        <button type="submit" name="button">
+          {!idEdit ? 'Add contact' : 'Edit contact'}
+        </button>
+        {idEdit && (
+          <button type="button" onClick={handleClick}>
+            Cancel
+          </button>
+        )}
+      </ButtonContainer>
     </Form>
   );
 };

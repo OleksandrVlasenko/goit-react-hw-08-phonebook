@@ -10,7 +10,7 @@ import {
 } from 'redux/contacts/selectors';
 import { selectIsLoggedIn, selectIsRefreshing } from 'redux/auth/selectors';
 
-export const ContactList = () => {
+export const ContactList = ({ setIdEdit }) => {
   const isLoadingContacts = useSelector(selectIsLoadingContacts);
   const filteredContacts = useSelector(selectFilteredContacts);
   const contacts = useSelector(selectContacts);
@@ -21,7 +21,13 @@ export const ContactList = () => {
     <Contacts>
       <ul>
         {filteredContacts.map(({ id, name, number }) => (
-          <Contact key={id} id={id} name={name} number={number} />
+          <Contact
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            setIdEdit={setIdEdit}
+          />
         ))}
       </ul>
 

@@ -6,7 +6,7 @@ import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { Filter } from 'components/Filter/Filter';
 import { selectError } from 'redux/contacts/selectors';
 import { fetchContacts } from 'redux/contacts/operations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AddContactContainer,
   ContactsContainer,
@@ -14,6 +14,7 @@ import {
 } from './Contacts.styled';
 
 export default function Contacts() {
+  const [idEdit, setIdEdit] = useState(null);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
 
@@ -21,19 +22,19 @@ export default function Contacts() {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
-      <Container>
-        <h1>Phonebook</h1>
-        <div>
-          <AddContactContainer>
-            <h2>Add new contact</h2>
-            <ContactForm />
-          </AddContactContainer>
-          <ContactsContainer>
-            <h2>Contacts</h2>
-            <Filter />
-            {error ? <ErrorMessage /> : <ContactList />}
-          </ContactsContainer>
-        </div>
-      </Container>
+    <Container>
+      <h1>Phonebook</h1>
+      <div>
+        <AddContactContainer>
+          <h2>{!idEdit ? 'Add new contact' : 'Edit contact'}</h2>
+          <ContactForm idEdit={idEdit} setIdEdit={setIdEdit} />
+        </AddContactContainer>
+        <ContactsContainer>
+          <h2>Contacts</h2>
+          <Filter />
+          {error ? <ErrorMessage /> : <ContactList setIdEdit={setIdEdit} />}
+        </ContactsContainer>
+      </div>
+    </Container>
   );
 }

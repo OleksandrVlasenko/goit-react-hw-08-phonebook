@@ -22,3 +22,8 @@ export const Form = styled.form`
     width: 100px;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
