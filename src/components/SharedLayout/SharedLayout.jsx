@@ -5,12 +5,10 @@ import { AppBar } from 'components/AppBar/AppBar';
 export const SharedLayout = () => {
   return (
     <>
-      {/* <Container> */}
       <AppBar />
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
-      {/* </Container> */}
     </>
   );
 };

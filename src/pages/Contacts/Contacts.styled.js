@@ -9,13 +9,6 @@ export const Container = styled.div`
   padding-right: 20px;
 `;
 
-// export const Container = styled.div`
-//   display: flex;
-//   width: 100%;
-//   /* gap: 50px; */
-//   justify-content: space-between;
-// `;
-
 export const AddContactContainer = styled.div`
   position: fixed;
   top: 90px;

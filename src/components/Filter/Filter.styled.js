@@ -6,8 +6,4 @@ export const FilterField = styled.div`
   padding-right: 20px;
   width: 400px;
   margin-top: 10px;
-
-  /* & input {
-    width: 100%;
-  } */
 `;

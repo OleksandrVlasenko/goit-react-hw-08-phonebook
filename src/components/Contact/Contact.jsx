@@ -9,7 +9,6 @@ import { selectIsLoadingContacts } from 'redux/contacts/selectors';
 import { IconButton } from '@mui/material';
 
 export const Contact = ({ name, number, id, setIdEdit }) => {
-  // const [idOfDeletingContact, setIdOfDeletingContact] = useState(null);
   const dispatch = useDispatch();
   const isLoadingContacts = useSelector(selectIsLoadingContacts);
 
@@ -18,7 +17,6 @@ export const Contact = ({ name, number, id, setIdEdit }) => {
       return;
     }
     dispatch(deleteContact(id));
-    // setIdOfDeletingContact(id);
   };
 
   return (
