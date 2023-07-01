@@ -3,8 +3,8 @@ import shortid from 'shortid';
 
 import { FilterField } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from 'redux/filterSlice';
-import { selectFilter } from 'redux/selectors';
+import { changeFilter } from 'redux/contacts/filterSlice';
+import { selectFilter } from 'redux/contacts/selectors';
 
 const filterId = shortid.generate();
 

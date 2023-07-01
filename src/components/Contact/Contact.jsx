@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 import { ContactItem, ContactName, DeleteButton } from './Contact.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/operations';
-import { selectIsLoading } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/operations';
+import { selectIsLoadingContacts } from 'redux/contacts/selectors';
 
 export const Contact = ({ name, number, id }) => {
   const [idOfDeletingContact, setIdOfDeletingContact] = useState(null);
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  const isLoadingContacts = useSelector(selectIsLoadingContacts);
 
   const handleDeleteContact = () => {
-    if (isLoading) {
+    if (isLoadingContacts) {
       return;
     }
     dispatch(deleteContact(id));
@@ -24,7 +24,7 @@ export const Contact = ({ name, number, id }) => {
       <ContactName>{name}:</ContactName>
       <p>{number}</p>
       <DeleteButton type="button" onClick={handleDeleteContact}>
-        {isLoading && idOfDeletingContact === id ? 'Deleting' : 'Delete'}
+        {isLoadingContacts && idOfDeletingContact === id ? 'Deleting' : 'Delete'}
       </DeleteButton>
     </ContactItem>
   );

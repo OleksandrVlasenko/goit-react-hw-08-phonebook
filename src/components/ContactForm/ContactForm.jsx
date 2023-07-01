@@ -4,8 +4,8 @@ import Notiflix from 'notiflix';
 
 import { Form } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations';
-import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
 
 const nameId = shortid.generate();
 const numberId = shortid.generate();

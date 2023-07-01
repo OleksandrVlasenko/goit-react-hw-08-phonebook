@@ -6,14 +6,16 @@ import { useSelector } from 'react-redux';
 import {
   selectContacts,
   selectFilteredContacts,
-  selectIsLoading,
-} from 'redux/selectors';
+  selectIsLoadingContacts,
+} from 'redux/contacts/selectors';
+import { selectIsLoggedIn, selectIsRefreshing } from 'redux/auth/selectors';
 
 export const ContactList = () => {
-  const isLoading = useSelector(selectIsLoading);
-
+  const isLoadingContacts = useSelector(selectIsLoadingContacts);
   const filteredContacts = useSelector(selectFilteredContacts);
   const contacts = useSelector(selectContacts);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <Contacts>
@@ -22,11 +24,12 @@ export const ContactList = () => {
           <Contact key={id} id={id} name={name} number={number} />
         ))}
       </ul>
-      {contacts.length === 0 && !isLoading ? (
+
+      {isLoggedIn && contacts.length === 0 && !isRefreshing ? (
         <InfoMessage>The list of contacts is empty</InfoMessage>
       ) : (
         filteredContacts.length === 0 &&
-        !isLoading && <InfoMessage>Nothing found</InfoMessage>
+        !isLoadingContacts && <InfoMessage>Nothing found</InfoMessage>
       )}
     </Contacts>
   );
