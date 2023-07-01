@@ -5,6 +5,7 @@ export const Contacts = styled.div`
   overflow-y: scroll;
 
   padding: 20px;
+  /* padding-left: 0; */
   width: 400px;
 
   -ms-overflow-style: none;

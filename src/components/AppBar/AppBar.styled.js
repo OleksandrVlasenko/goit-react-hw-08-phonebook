@@ -6,8 +6,10 @@ export const Header = styled.header`
   left: 0;
   width: 100%;
   height: 60px;
+  background-color: #fff;
+  border-bottom: 2px solid #05888d;
 
-  background-color: #1976d2;
+  z-index: 1000;
 `;
 
 export const Container = styled.div`

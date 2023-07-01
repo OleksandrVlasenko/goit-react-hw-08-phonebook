@@ -6,9 +6,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -130,13 +127,27 @@ export const RegisterForm = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#05888da2',
+                },
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#05888d',
+                border: '2px solid transparent',
+              }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <ButtonBase variant="body2" onClick={handleClick}>
+                <ButtonBase
+                  variant="body2"
+                  onClick={handleClick}
+                  sx={{
+                    border: '2px solid transparent',
+                  }}
+                >
                   {'Already have an account? Sign in'}
                 </ButtonBase>
               </Grid>

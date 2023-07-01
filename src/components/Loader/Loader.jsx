@@ -1,11 +1,6 @@
 import { Oval } from 'react-loader-spinner';
-import { useSelector } from 'react-redux';
-
-import { selectIsLoadingContacts } from 'redux/contacts/selectors';
 
 export const Loader = () => {
-  const isLoadingContacts = useSelector(selectIsLoadingContacts);
-
   return (
     <Oval
       height={60}
@@ -18,7 +13,6 @@ export const Loader = () => {
         transform: 'translate(-30px, -30px)',
       }}
       wrapperClass=""
-      // visible={isLoadingContacts}
       ariaLabel="oval-loading"
       secondaryColor="#05888d"
       strokeWidth={5}

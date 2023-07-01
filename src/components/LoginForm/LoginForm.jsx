@@ -2,9 +2,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -15,26 +12,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ButtonBase } from '@mui/material';
-
-// function Copyright(props) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
 const defaultTheme = createTheme();
 
@@ -77,7 +56,7 @@ export const LoginForm = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{pt: "60px"}}>
+      <Container component="main" maxWidth="xs" sx={{ pt: '60px' }}>
         <CssBaseline />
         <Box
           sx={{
@@ -123,33 +102,37 @@ export const LoginForm = () => {
               onChange={handleChange}
               value={password}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#05888da2',
+                },
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#05888d',
+                border: '2px solid transparent',
+              }}
             >
               Sign In
             </Button>
             <Grid container justifyContent="flex-end">
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
-                <ButtonBase variant="body2" onClick={handleClick}>
+                <ButtonBase
+                  variant="body2"
+                  onClick={handleClick}
+                  sx={{
+                    border: '2px solid transparent',
+                  }}
+                >
                   {"Don't have an account? Sign Up"}
                 </ButtonBase>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );
